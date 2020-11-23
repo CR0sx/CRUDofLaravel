@@ -1,61 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+before clone this project, make sure you install all the prerequisites:
+1. php 7.1 or higher
+2. composer
+3. MySql (or anything you familiar with, SQL based;i build this API with mysql)
+4. laravel 8.15 (latest)
+5. postman (for testing)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+how to use:
+1. clone this project
 
-## About Laravel
+2. create a database first (remember that your database name) 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+3. go to project directory, find .env file, then edit like this;
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=(your_database_name) //laravel_crud_api by default
+    DB_USERNAME=(your_database_username) //just leave it blank if you not configure any username
+    DB_PASSWORD=(your_database_password) //same like username, just leave it blank if you not configure any password
+    
+4. run command "php artisan migrate" on your CLI (make sure you run it on project directory)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+5. wait and if everything goes well, run "php artisan serve" and you good to go!
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+how to test with postman:
+In this API, there are consist of 7 route with different function (CRUD function). This project is all about student with their course, so i set 2 coloumn (name and course) in the table. You can see all of API route on api.php
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. createStudent()
+    -go to postman, set request to "POST"
+    -fill the URL with "http://localhost:8000/api/student/add"
+    -on the Params tab fill the key and the value, click send, example: 
+        -key: name, value: lucas
+        -key: course, value: math
+    -if everything goes well, the result show that input data
+2. getAllStudent()
+    -set request to "GET"
+    -fill the URL with "http://localhost:8000/api/student/all"
+    -click send
+    -the result show all data in your database
+3. getStudent($id)
+    -set request to "GET"
+    -fill the url with "http://localhost:8000/api/student/id/{id}"
+    -change "{id}" with id number on your database
+    -the result show data on requested id
+4. searchStudentName() and searchStudentCourse()
+    -set request to "GET"
+    -fill the url with "http://localhost:8000/api/student/search/name/" (for name) or "http://localhost:8000/api/student/search/course/" (for course)
+    -on the params tab fill the key with "search" and value with string you want to search, then click send
+    -the result show data with all matched string
+5. editStudent($id)
+    -set request to "PUT"
+    -fill the url with "http://localhost:8000/api/student/edit/{id}"
+    -change "{id}" with id number on your database that you want to change
+    -on the params tab fill key with "name" and "course", then fill "value" with string you want to change
+    -the result show data has changed
+6. deleteStudent($id)
+    -set request to "DELETE"
+    -fill the url with "http://localhost:8000/api/student/delete/id/{id}"
+    -change "{id}" with id data you want to delete
+    -click send
+    -the result show data has been deleted
+    
+    
+hope this API help you and THANK YOU!
+    
